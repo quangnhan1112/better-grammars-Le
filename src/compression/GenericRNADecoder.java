@@ -5,10 +5,10 @@
  */
 package compression;
 
-import compression.arithmaticCoding.bigDecimalAc.ArithmeticDecoder;
-import compression.arithmaticCoding.bigDecimalAc.Interval;
+import compression.coding.bigdecimal.ArithmeticDecoder;
+import compression.coding.bigdecimal.Interval;
 import compression.grammar.*;
-import compression.samplegrammars.model.RuleProbModel;
+import compression.samplegrammars.model.bigdecimal.RuleProbModel;
 import compression.grammar.Category;
 import compression.grammar.NonTerminal;
 

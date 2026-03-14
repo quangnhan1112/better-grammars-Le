@@ -1,9 +1,9 @@
 package compression;
 
-import compression.arithmaticCoding.bigDecimalAc.ArithmeticEncoder;
+import compression.coding.bigdecimal.ArithmeticEncoder;
 import compression.grammar.RNAGrammar;
 import compression.grammar.RNAWithStructure;
-import compression.samplegrammars.model.RuleProbModel;
+import compression.samplegrammars.model.bigdecimal.RuleProbModel;
 import compression.grammar.NonTerminal;
 import compression.grammar.Rule;
 

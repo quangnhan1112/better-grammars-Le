@@ -8,8 +8,8 @@
 import compression.GenericRNADecoder;
 import compression.GenericRNAEncoder;
 import compression.LocalConfig;
-import compression.arithmaticCoding.bigDecimalAc.ExactArithmeticDecoder;
-import compression.arithmaticCoding.bigDecimalAc.ExactArithmeticEncoder;
+import compression.coding.bigdecimal.ExactArithmeticDecoder;
+import compression.coding.bigdecimal.ExactArithmeticEncoder;
 import compression.data.Dataset;
 import compression.data.FolderBasedDataset;
 import compression.data.TrainingDataset;
@@ -19,8 +19,8 @@ import compression.grammar.SecondaryStructureGrammar;
 import compression.parser.GrammarReaderNWriter;
 import compression.samplegrammars.DowellGrammar1Bound;
 import compression.samplegrammars.SampleGrammar;
-import compression.samplegrammars.model.AdaptiveRuleProbModel;
-import compression.samplegrammars.model.RuleProbModel;
+import compression.samplegrammars.model.bigdecimal.AdaptiveRuleProbModel;
+import compression.samplegrammars.model.bigdecimal.RuleProbModel;
 import junit.framework.Assert;
 import org.junit.Test;
 //import org.testng.annotations.Test;
@@ -33,23 +33,23 @@ import java.util.List;
 import java.util.Random;
 
 public class Encode_N_Decode_CorrectlyTest {
-    Dataset dataset = new FolderBasedDataset("TestDataSet");
+    Dataset dataset = new FolderBasedDataset("dowell-benchmark-10-percent");
     TrainingDataset trainingDataset = new TrainingDataset("TestTrainingData");
     boolean withNonCanonicalRules = true;
     boolean withHairpinLengthOne = true;
     List<SampleGrammar> listOfGrammars = List.of(
-		    new DowellGrammar1Bound(withNonCanonicalRules)
+            new DowellGrammar1Bound(withNonCanonicalRules)
     );
 
     @Test
     public void testEncodeNDecode4AutoGenGrammars() throws IOException {
         List<SecondaryStructureGrammar> listOfGrammars = new ArrayList<>();
-        String folderNameForGrammars= "testing-10";
-        File grammarFiles = new File(LocalConfig.GIT_ROOT+"/grammars/"+folderNameForGrammars);
+        String folderNameForGrammars = "testing-10";
+        File grammarFiles = new File(LocalConfig.GIT_ROOT + "/grammars/" + folderNameForGrammars);
 
         File[] listOfFiles = grammarFiles.listFiles();
         Random random = new Random(11124);
-        for( int i =0; i<30; i++) {
+        for (int i = 0; i < 30; i++) {
             File randomGrammarFileSelection = listOfFiles[random.nextInt(listOfFiles.length)];
             RNAGrammar g = RNAGrammar.from(new GrammarReaderNWriter(randomGrammarFileSelection.getPath()).getGrammarFromFile(), true);
 
@@ -65,7 +65,6 @@ public class Encode_N_Decode_CorrectlyTest {
             //System.out.println(rnaws.secondaryStructure.length());
             //System.exit(0);
             //RNAWithStructure rnaws = FolderBasedDataset.readRNA(new File("C:/Users/evita/Documents/GitHub/compressed-rna/datasets/TestDataSet/testRna2.txt"));
-
 
 
             ExactArithmeticEncoder AE = new ExactArithmeticEncoder();
@@ -91,8 +90,8 @@ public class Encode_N_Decode_CorrectlyTest {
 
                 System.out.println(RNAWS);
                 SI4T.runEncodeNDecodeStatic(RNAWS, trainingDataset);
-                SI4T.runEncodeNDecode4Adaptive(RNAWS);
                 SI4T.runEncodeNDecode4SemiAdaptive(RNAWS);
+                SI4T.runEncodeNDecode4Adaptive(RNAWS);
             }
         }
     }
